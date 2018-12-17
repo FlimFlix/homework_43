@@ -19,14 +19,6 @@ class Article(models.Model):
         return "%s.%s" % (self.pk, self.title)
 
 
-# class Favorite(models.Model):
-#     user = models.ForeignKey(User, related_name='favorites', on_delete=models.PROTECT, verbose_name='Пользователь')
-#     article = models.ForeignKey(Article, related_name='favorites', on_delete=models.PROTECT, verbose_name='Статья')
-#
-#     def __str__(self):
-#         return "%s %s" % (self.user.username, self.article.title)
-
-
 class Comment(models.Model):
     user = models.ForeignKey(User, related_name='comments', on_delete=models.PROTECT, verbose_name='Пользователь')
     article = models.ForeignKey(Article, related_name='comments', on_delete=models.PROTECT, verbose_name='Статья')
@@ -55,9 +47,9 @@ class Rating(models.Model):
     )
 
     user = models.ForeignKey(User, related_name='rate_article', on_delete=models.PROTECT, verbose_name='Пользователь')
-    article = models.ForeignKey(Article, related_name='rate_user', on_delete=models.PROTECT, verbose_name='Статья')
+    article = models.ForeignKey(Article, related_name='rate_article', on_delete=models.PROTECT, verbose_name='Статья')
     date_created = models.DateField(verbose_name='Дата создания')
     status = models.CharField(max_length=20, choices=RATING_CHOICES, default=RATING_NORMAL, verbose_name='Оценка')
 
     def __str__(self):
-        return "%s.%s - %s" % (self.article.pk, self.article.title, self.status)
+        return "%s.%s -  %s" % (self.article.pk, self.article.title, self.status)
