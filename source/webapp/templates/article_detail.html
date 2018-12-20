@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Проект{% endblock %}
+
+{% block content %}
+    <div class="alert alert-success m-2" role="alert">
+      <h4 class="alert-heading">{{ article.title }} (Автор: {{ article.user }})</h4>
+      <p>{{ article.text }}</p>
+      <hr>
+      <div class="btn-group ">
+          <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Оценки
+          </button>
+          <div class="dropdown-menu">
+            {% for rating in article.rate_article.all %}
+                <p>{{ rating.user }} - {{ rating.status }}</p>
+            {% endfor %}
+          </div>
+     </div>
+    </div>
+
+    <hr>
+    <h5>Комментарии</h5>
+    <hr>
+    {% for comment in article.comments.all %}
+        {% if not comment.parent_comment %}
+            <div class="row">
+                <div class="col-md-4">
+                    <p>{{ comment.user }}</p>
+                    <p>{{ comment.text }}</p>
+                    <p>{{ comment.date_created }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 offset-md-3">
+                    {% for sub_comment in comment.comments.all %}
+                        <p>{{ sub_comment.user }}</p>
+                        <p>{{ sub_comment.text }}</p>
+                        <p>{{ sub_comment.date_created }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+            <hr>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
