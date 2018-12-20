@@ -23,7 +23,7 @@ class Comment(models.Model):
     user = models.ForeignKey(User, related_name='comments', on_delete=models.PROTECT, verbose_name='Пользователь')
     article = models.ForeignKey(Article, related_name='comments', on_delete=models.PROTECT, verbose_name='Статья')
     text = models.TextField(max_length=1000, verbose_name='Текст')
-    date_created = models.DateField(verbose_name='Дата создания')
+    date_created = models.DateField(auto_now_add=True, verbose_name='Дата создания')
     parent_comment = models.ForeignKey('self', blank=True, null=True, related_name='comments', on_delete=models.PROTECT,
                                        verbose_name='Комментарий')
 
@@ -48,7 +48,7 @@ class Rating(models.Model):
 
     user = models.ForeignKey(User, related_name='rate_article', on_delete=models.PROTECT, verbose_name='Пользователь')
     article = models.ForeignKey(Article, related_name='rate_article', on_delete=models.PROTECT, verbose_name='Статья')
-    date_created = models.DateField(verbose_name='Дата создания')
+    date_created = models.DateField(auto_now_add=True, verbose_name='Дата создания')
     status = models.CharField(max_length=20, choices=RATING_CHOICES, default=RATING_NORMAL, verbose_name='Оценка')
 
     def __str__(self):

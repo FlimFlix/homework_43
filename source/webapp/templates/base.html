@@ -26,17 +26,8 @@
             <li class="nav-item">
                 <a href="{% url 'user_list' %}" class="nav-link">Пользователи</a>
             </li>
-             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Добавление
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="{% url 'article_create' %}">Добавить статью</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-              </li>
+            <li class="nav-item">
+                <a href="{% url 'article_create' %}" class="nav-link">Добавить статью</a>
             {% block menu %}{% endblock %}
         </ul>
     </div>

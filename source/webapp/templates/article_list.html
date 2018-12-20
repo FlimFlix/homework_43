@@ -1,5 +1,14 @@
 {% extends 'base.html' %}
 {% block title %}Статьи{% endblock %}
+{% block menu %}
+    <li>
+        <form action="{% url 'article_list' %}" method="GET">
+            {% csrf_token %}
+            {{ form.article_name }}
+            <button type="submit" class="btn btn-primary">Искать</button>
+        </form>
+    <li>
+{% endblock %}
 {% block content %}
     {% for article in article_list %}
         <div class="card text-center mt-4">
