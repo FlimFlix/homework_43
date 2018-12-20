@@ -2,20 +2,27 @@
 {% block title %}Проект{% endblock %}
 
 {% block content %}
-    <div class="alert alert-success m-2" role="alert">
-      <h4 class="alert-heading">{{ article.title }} (Автор: {{ article.user }})</h4>
-      <p>{{ article.text }}</p>
-      <hr>
-      <div class="btn-group ">
-          <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <div class="card m-4">
+      <div class="card-header">
+        Автор: {{ article.user }}
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">{{ article.title }}</h3>
+        <p class="card-text">{{ article.text }}</p>
+        <a href="{% url 'article_update' article.pk %}" class="btn btn-primary">Редактировать</a>
+          <div class="btn-group float-right">
+          <button class="btn btn-secondary btn-sm dropdown-toggle bg-info" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Оценки
           </button>
-          <div class="dropdown-menu">
+          <div class="dropdown-menu btn btn-primary">
             {% for rating in article.rate_article.all %}
                 <p>{{ rating.user }} - {{ rating.status }}</p>
+                {% empty %}
+                    <p>нет оценок</p>
             {% endfor %}
           </div>
      </div>
+      </div>
     </div>
 
     <hr>
